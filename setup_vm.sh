@@ -152,6 +152,9 @@ if [ $DISPLAY_INSTALL_STATUS -eq 0 ]; then
   
   # Create proxy configuration for XFCE4
   USER_HOME="/home/${CHROME_REMOTE_USER_NAME}"
+
+  # Force installation of pip package in managed env
+  echo "export PIP_BREAK_SYSTEM_PACKAGES=1" | tee -a ${USER_HOME}/.bashrc
   
   # Set environment variables for proxy (system-wide)
   echo "export http_proxy=http://${IP_ADDRESS}:${PORT}" | tee export_proxy.sh
