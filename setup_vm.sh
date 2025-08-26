@@ -144,6 +144,7 @@ sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension aaravb.chrome-extens
 sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension solomonkinard.chrome-extension-api
 sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension ms-vscode.live-server
 sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension fermelone.simple-browser-multi
+sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension google.geminicodeassist
 echo "done."
 
 # Reload desktop environment for the current user
