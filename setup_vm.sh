@@ -123,7 +123,7 @@ echo "GUI installation completed."
 echo "Installing Burp Suite Community Edition ..."
 sudo chmod +x burpsuite
 sudo ./burpsuite -q
-rm burpsuite
+sudo rm burpsuite
 
 # Install Zaproxy
 echo "Installing Zaproxy ..."
