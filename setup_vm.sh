@@ -127,7 +127,7 @@ rm burpsuite
 
 # Install Zaproxy
 echo "Installing Zaproxy ..."
-sudo snap install zaproxy
+sudo snap install zaproxy --classic
 
 # Install VsCode
 echo "Installing VsCode..."
