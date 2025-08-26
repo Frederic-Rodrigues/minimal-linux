@@ -114,7 +114,8 @@ fi
 
 # Install packages Gui
 echo "Installing minimal desktop environment and applications..."
-sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk
+sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd
+pip install jsbeautifier esprima
 wait
 echo "GUI installation completed."
 
@@ -124,16 +125,22 @@ sudo chmod +x burpsuite
 sudo ./burpsuite -q
 rm burpsuite
 
+# Install Zaproxy
+echo "Installing Zaproxy ..."
+sudo snap install zaproxy
+
 # Install VsCode
 echo "Installing VsCode..."
 sudo snap install --classic code
 wait
 echo "VsCode installation completed."
 echo "Installing VSCode extensions:"
-sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension esbenp.prettier-vscode
+sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension numso.prettier-standard-vscode
 sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension ipatalas.vscode-postfix-ts
 sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension aaravb.chrome-extension-developer-tools
 sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension solomonkinard.chrome-extension-api
+sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension ms-vscode.live-server
+sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension fermelone.simple-browser-multi
 echo "done."
 
 # Reload desktop environment for the current user
@@ -147,17 +154,18 @@ if [ $DISPLAY_INSTALL_STATUS -eq 0 ]; then
   USER_HOME="/home/${CHROME_REMOTE_USER_NAME}"
   
   # Set environment variables for proxy (system-wide)
-  echo "export http_proxy=http://${IP_ADDRESS}:${PORT}" | sudo tee -a ${USER_HOME}/.bashrc
-  echo "export https_proxy=http://${IP_ADDRESS}:${PORT}" | sudo tee -a ${USER_HOME}/.bashrc
-  echo "export HTTP_PROXY=http://${IP_ADDRESS}:${PORT}" | sudo tee -a ${USER_HOME}/.bashrc
-  echo "export HTTPS_PROXY=http://${IP_ADDRESS}:${PORT}" | sudo tee -a ${USER_HOME}/.bashrc
+  echo "export http_proxy=http://${IP_ADDRESS}:${PORT}" | tee export_proxy.sh
+  echo "export https_proxy=http://${IP_ADDRESS}:${PORT}" | tee -a export_proxy.sh
+  echo "export HTTP_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a export_proxy.sh
+  echo "export HTTPS_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a export_proxy.sh
   
   # Create proxy configuration for applications
   sudo -u ${CHROME_REMOTE_USER_NAME} mkdir -p ${USER_HOME}/.config/environment.d
-  echo "http_proxy=http://${IP_ADDRESS}:${PORT}" | sudo -u ${CHROME_REMOTE_USER_NAME} tee ${USER_HOME}/.config/environment.d/proxy.conf
-  echo "https_proxy=http://${IP_ADDRESS}:${PORT}" | sudo -u ${CHROME_REMOTE_USER_NAME} tee -a ${USER_HOME}/.config/environment.d/proxy.conf
-  echo "HTTP_PROXY=http://${IP_ADDRESS}:${PORT}" | sudo -u ${CHROME_REMOTE_USER_NAME} tee -a ${USER_HOME}/.config/environment.d/proxy.conf
-  echo "HTTPS_PROXY=http://${IP_ADDRESS}:${PORT}" | sudo -u ${CHROME_REMOTE_USER_NAME} tee -a ${USER_HOME}/.config/environment.d/proxy.conf
+  echo "# Copy to ${USER_HOME}/.config/environment.d/proxy.conf" | tee env_proxy.conf
+  echo "http_proxy=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
+  echo "https_proxy=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
+  echo "HTTP_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
+  echo "HTTPS_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
   
   # Configure Chrome browser proxy settings
   CHROME_POLICY_DIR="/etc/opt/chrome/policies/managed"
