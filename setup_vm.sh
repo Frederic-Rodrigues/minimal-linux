@@ -93,11 +93,13 @@ echo "Downloads completed."
 # Install Google Chrome Stable
 echo "Installing Google Chrome Stable..."
 sudo ${APT_INSTALL_CMD} install -yqq "./google-chrome-stable_current_amd64.deb"
+wait
 rm "./google-chrome-stable_current_amd64.deb"
 
 # Install Chrome Remote Desktop
 echo "Installing Chrome Remote Desktop..."
 sudo ${APT_INSTALL_CMD} install -yqq "./chrome-remote-desktop_current_amd64.deb"
+wait
 rm "./chrome-remote-desktop_current_amd64.deb"
 
 # Start Chrome Remote Desktop host if code is provided
@@ -123,7 +125,8 @@ echo "GUI installation completed."
 echo "Installing Burp Suite Community Edition ..."
 sudo chmod +x burpsuite
 sudo ./burpsuite -q
-sudo rm burpsuite
+wait
+rm burpsuite
 
 # Install Zaproxy
 echo "Installing Zaproxy ..."
