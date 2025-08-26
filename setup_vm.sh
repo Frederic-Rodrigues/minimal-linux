@@ -174,7 +174,8 @@ if [ $DISPLAY_INSTALL_STATUS -eq 0 ]; then
   echo "HTTPS_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
   
   # Configure Chrome browser proxy settings
-  CHROME_POLICY_DIR="/etc/opt/chrome/policies/managed"
+  #CHROME_POLICY_DIR="/etc/opt/chrome/policies/managed"
+  CHROME_POLICY_DIR=.
   sudo mkdir -p ${CHROME_POLICY_DIR}
   sudo tee ${CHROME_POLICY_DIR}/proxy.json > /dev/null <<EOF
 {
