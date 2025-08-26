@@ -148,8 +148,6 @@ if [ $DISPLAY_INSTALL_STATUS -eq 0 ]; then
   echo "Reload desktop environment for the current user ${CHROME_REMOTE_USER_NAME}..."
   sudo systemctl restart chrome-remote-desktop@${CHROME_REMOTE_USER_NAME}.service
 
-  echo "Setting manual proxy settings (${IP_ADDRESS}:${PORT}) for Chrome Remote Desktop session..."
-  
   # Create proxy configuration for XFCE4
   USER_HOME="/home/${CHROME_REMOTE_USER_NAME}"
 
@@ -157,14 +155,16 @@ if [ $DISPLAY_INSTALL_STATUS -eq 0 ]; then
   echo "export PIP_BREAK_SYSTEM_PACKAGES=1" | tee -a ${USER_HOME}/.bashrc
   
   # Set environment variables for proxy (system-wide)
+  echo "run ./export_proxy.sh or add file to .bashrc to set proxy"  
   echo "export http_proxy=http://${IP_ADDRESS}:${PORT}" | tee export_proxy.sh
   echo "export https_proxy=http://${IP_ADDRESS}:${PORT}" | tee -a export_proxy.sh
   echo "export HTTP_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a export_proxy.sh
   echo "export HTTPS_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a export_proxy.sh
+  chmod +x export_proxy.sh
   
   # Create proxy configuration for applications
   sudo -u ${CHROME_REMOTE_USER_NAME} mkdir -p ${USER_HOME}/.config/environment.d
-  echo "# Copy to ${USER_HOME}/.config/environment.d/proxy.conf" | tee env_proxy.conf
+  echo "# Copy env_proxy.conf to ${USER_HOME}/.config/environment.d/proxy.conf" | tee env_proxy.conf
   echo "http_proxy=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
   echo "https_proxy=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
   echo "HTTP_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
@@ -185,7 +185,7 @@ EOF
   sudo chown -R ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.config
   sudo chown ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.bashrc
   
-  echo "Manual proxy settings applied for XFCE4 environment."
+  #echo "Manual proxy settings applied for XFCE4 environment."
 else
    echo "GUI installation failed. Skipping desktop environment reload."
 fi
