@@ -18,7 +18,7 @@ This script automates the installation and configuration of a Linux virtual mach
 - **apt-fast** - Accelerated package manager
 - **zaproxy** - Web security testing tool
 - **Gemini Code Assist** - Official genai companion for vscode
-- **tools** - python3-pip, build-essential, etc.
+- **tools** - python3-pip, npm, build-essential, etc.
 
 ## Prerequisites
 
