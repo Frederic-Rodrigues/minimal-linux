@@ -116,7 +116,7 @@ fi
 
 # Install packages Gui
 echo "Installing minimal desktop environment and applications..."
-sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd
+sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid
 pip install jsbeautifier esprima
 wait
 echo "GUI installation completed."
@@ -159,32 +159,34 @@ if [ $DISPLAY_INSTALL_STATUS -eq 0 ]; then
   echo "export PIP_BREAK_SYSTEM_PACKAGES=1" | tee -a ${USER_HOME}/.bashrc
   
   # Set environment variables for proxy (system-wide)
-  echo "run ./export_proxy.sh or add file to .bashrc to set proxy"  
-  echo "export http_proxy=http://${IP_ADDRESS}:${PORT}" | tee export_proxy.sh
-  echo "export https_proxy=http://${IP_ADDRESS}:${PORT}" | tee -a export_proxy.sh
-  echo "export HTTP_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a export_proxy.sh
-  echo "export HTTPS_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a export_proxy.sh
-  chmod +x export_proxy.sh
-  
-  # Create proxy configuration for applications
+  echo "run ./set_proxy.sh to set proxy globally to use with burp or zaproxy"  
   sudo -u ${CHROME_REMOTE_USER_NAME} mkdir -p ${USER_HOME}/.config/environment.d
-  echo "# Copy env_proxy.conf to ${USER_HOME}/.config/environment.d/proxy.conf" | tee env_proxy.conf
-  echo "http_proxy=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
-  echo "https_proxy=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
-  echo "HTTP_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
-  echo "HTTPS_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a env_proxy.conf
-  
-  # Configure Chrome browser proxy settings
-  #CHROME_POLICY_DIR="/etc/opt/chrome/policies/managed"
-  CHROME_POLICY_DIR=.
-  sudo mkdir -p ${CHROME_POLICY_DIR}
-  sudo tee ${CHROME_POLICY_DIR}/proxy.json > /dev/null <<EOF
+  cat >set_proxy.sh <<EOT
+# Set proxy for console session
+export http_proxy=http://${IP_ADDRESS}:${PORT}"
+export https_proxy=http://${IP_ADDRESS}:${PORT}"
+export HTTP_PROXY=http://${IP_ADDRESS}:${PORT}"
+export HTTPS_PROXY=http://${IP_ADDRESS}:${PORT}"
+
+# Set proxy for env
+echo "http_proxy=http://${IP_ADDRESS}:${PORT}" | tee ${USER_HOME}/.config/environment.d
+echo "https_proxy=http://${IP_ADDRESS}:${PORT}" | tee -a ${USER_HOME}/.config/environment.d
+echo "HTTP_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a ${USER_HOME}/.config/environment.d
+echo "HTTPS_PROXY=http://${IP_ADDRESS}:${PORT}" | tee -a ${USER_HOME}/.config/environment.d
+
+# Configure Chrome browser proxy settings
+CHROME_POLICY_DIR="/etc/opt/chrome/policies/managed"
+sudo mkdir -p ${CHROME_POLICY_DIR}
+sudo tee ${CHROME_POLICY_DIR}/proxy.json > /dev/null <<EOF
 {
   "ProxyMode": "fixed_servers",
   "ProxyServer": "${IP_ADDRESS}:${PORT}",
   "ProxyBypassList": "localhost,127.0.0.1"
 }
 EOF
+EOT
+  
+  chmod +x set_proxy.sh
   
   # Set proper ownership
   sudo chown -R ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.config
