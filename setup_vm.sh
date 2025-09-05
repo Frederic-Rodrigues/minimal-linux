@@ -145,6 +145,7 @@ sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension solomonkinard.chrome
 sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension ms-vscode.live-server
 sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension fermelone.simple-browser-multi
 sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension google.geminicodeassist
+sudo -u ${CHROME_REMOTE_USER_NAME} code --install-extension ms-python.python
 echo "done."
 
 # Reload desktop environment for the current user
@@ -193,6 +194,7 @@ EOT
   sudo chown ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.bashrc
 
   echo >>${USER_HOME}/.bashrc 'export PATH=$PATH:'${USER_HOME}/.local/bin
+  echo >>${USER_HOME}/.nanorc 'set linenumbers'
   
   #echo "Manual proxy settings applied for XFCE4 environment."
 else
