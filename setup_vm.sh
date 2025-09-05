@@ -116,7 +116,7 @@ fi
 
 # Install packages Gui
 echo "Installing minimal desktop environment and applications..."
-sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm jsbeautifier
+sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm jsbeautifier xclip
 pip install jsbeautifier esprima
 wait
 echo "GUI installation completed."
@@ -191,6 +191,8 @@ EOT
   # Set proper ownership
   sudo chown -R ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.config
   sudo chown ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.bashrc
+
+  echo >>${USER_HOME}/.bashrc 'export PATH=$PATH:'${USER_HOME}/.local/bin
   
   #echo "Manual proxy settings applied for XFCE4 environment."
 else
