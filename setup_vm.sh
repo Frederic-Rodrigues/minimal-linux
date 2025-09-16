@@ -116,7 +116,7 @@ fi
 
 # Install packages Gui
 echo "Installing minimal desktop environment and applications..."
-sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm jsbeautifier xclip
+sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm jsbeautifier xclip xfce4-screenshooter
 pip install jsbeautifier esprima
 wait
 echo "GUI installation completed."
