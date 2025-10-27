@@ -116,7 +116,7 @@ fi
 
 # Install packages Gui
 echo "Installing minimal desktop environment and applications..."
-sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm jsbeautifier xclip xfce4-screenshooter
+sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm jsbeautifier xclip xfce4-screenshooter mousepad
 pip install jsbeautifier esprima
 wait
 echo "GUI installation completed."
@@ -131,6 +131,15 @@ rm burpsuite
 # Install Zaproxy
 echo "Installing Zaproxy ..."
 sudo snap install zaproxy --classic
+
+# Install Gemini
+echo "Installing Gemini ..."
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm install 20
+nvm use 20
+npm install -g @google/gemini-cli
 
 # Install VsCode
 echo "Installing VsCode..."
