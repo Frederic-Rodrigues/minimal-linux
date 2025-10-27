@@ -202,7 +202,11 @@ EOT
   sudo chown -R ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.config
   sudo chown ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.bashrc
 
-  echo >>${USER_HOME}/.bashrc 'export PATH=$PATH:'${USER_HOME}/.local/bin
+  echo >>${USER_HOME}/.bashrc <<EOT
+export PATH=$PATH:${USER_HOME}/.local/bin
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+EOT
   echo >>${USER_HOME}/.nanorc 'set linenumbers'
   
   #echo "Manual proxy settings applied for XFCE4 environment."
