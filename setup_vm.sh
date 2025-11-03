@@ -210,8 +210,12 @@ EOT
 export PATH=$PATH:${USER_HOME}/.local/bin
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+export PS1="\[\033[0;32m\]\w\[\033[0m\]\$ "
 EOT
-  echo >>${USER_HOME}/.nanorc 'set linenumbers'
+  echo >${USER_HOME}/.nanorc <<EOT
+set linenumbers
+set tabsize 4
+EOT
   
   #echo "Manual proxy settings applied for XFCE4 environment."
 else
