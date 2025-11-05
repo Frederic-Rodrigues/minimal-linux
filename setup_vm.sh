@@ -207,8 +207,8 @@ EOT
   sudo chown ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.bashrc
 
   echo >>${USER_HOME}/.bashrc <<\EOT
-export PATH=$PATH:${USER_HOME}/.local/bin
-export NVM_DIR="${USER_HOME}/.nvm"
+export PATH=$PATH:${HOME}/.local/bin
+export NVM_DIR="${HOME}/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 export PS1="\[\033[0;32m\]\w\[\033[0m\]\$ "
 EOT
