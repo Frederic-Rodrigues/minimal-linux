@@ -136,7 +136,7 @@ sudo snap install zaproxy --classic
 echo "Installing Gemini ..."
 cat >gemini.sh <<EOT
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="/home/${CHROME_REMOTE_USER_NAME}/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install 20
 nvm use 20
@@ -206,9 +206,9 @@ EOT
   sudo chown -R ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.config
   sudo chown ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.bashrc
 
-  echo >>${USER_HOME}/.bashrc <<EOT
+  echo >>${USER_HOME}/.bashrc <<\EOT
 export PATH=$PATH:${USER_HOME}/.local/bin
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="${USER_HOME}/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 export PS1="\[\033[0;32m\]\w\[\033[0m\]\$ "
 EOT
