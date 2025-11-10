@@ -117,6 +117,10 @@ fi
 # Install packages Gui
 echo "Installing minimal desktop environment and applications..."
 sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm jsbeautifier xclip xfce4-screenshooter mousepad
+
+# Force installation of pip package in managed env
+echo "export PIP_BREAK_SYSTEM_PACKAGES=1" | tee -a ${HOME}/.bashrc  
+
 pip install jsbeautifier esprima
 wait
 echo "GUI installation completed."
@@ -169,9 +173,6 @@ if [ $DISPLAY_INSTALL_STATUS -eq 0 ]; then
   # Create proxy configuration for XFCE4
   USER_HOME="/home/${CHROME_REMOTE_USER_NAME}"
 
-  # Force installation of pip package in managed env
-  echo "export PIP_BREAK_SYSTEM_PACKAGES=1" | tee -a ${HOME}/.bashrc
-  
   # Set environment variables for proxy (system-wide)
   echo "run ./set_proxy.sh to set proxy globally to use with burp or zaproxy"  
   sudo -u ${CHROME_REMOTE_USER_NAME} mkdir -p ${USER_HOME}/.config/environment.d
