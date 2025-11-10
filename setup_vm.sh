@@ -136,7 +136,7 @@ sudo snap install zaproxy --classic
 echo "Installing Gemini ..."
 cat >gemini.sh <<EOT
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-export NVM_DIR="/home/${CHROME_REMOTE_USER_NAME}/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"
 nvm install 20
 nvm use 20
@@ -170,7 +170,7 @@ if [ $DISPLAY_INSTALL_STATUS -eq 0 ]; then
   USER_HOME="/home/${CHROME_REMOTE_USER_NAME}"
 
   # Force installation of pip package in managed env
-  echo "export PIP_BREAK_SYSTEM_PACKAGES=1" | tee -a ${USER_HOME}/.bashrc
+  echo "export PIP_BREAK_SYSTEM_PACKAGES=1" | tee -a ${HOME}/.bashrc
   
   # Set environment variables for proxy (system-wide)
   echo "run ./set_proxy.sh to set proxy globally to use with burp or zaproxy"  
