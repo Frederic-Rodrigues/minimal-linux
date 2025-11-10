@@ -143,7 +143,7 @@ nvm use 20
 npm install -g @google/gemini-cli
 EOT
 chmod +x gemini.sh
-sudo -u ${CHROME_REMOTE_USER_NAME} bash gemini.sh
+bash gemini.sh
 
 # Install VsCode
 echo "Installing VsCode..."
@@ -206,11 +206,11 @@ EOT
   sudo chown -R ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.config
   sudo chown ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.bashrc
 
-  cat >>${USER_HOME}/.bashrc <<\EOT
+  cat >>${HOME}/.bashrc <<\EOT
 export PATH=$PATH:${HOME}/.local/bin
 export PS1="\[\033[0;32m\]\w\[\033[0m\]\$ "
 EOT
-  cat >${USER_HOME}/.nanorc <<EOT
+  cat >${HOME}/.nanorc <<EOT
 set linenumbers
 set tabsize 4
 EOT
