@@ -119,8 +119,7 @@ echo "Installing minimal desktop environment and applications..."
 sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm jsbeautifier xclip xfce4-screenshooter mousepad
 
 # Force installation of pip package in managed env
-echo "export PIP_BREAK_SYSTEM_PACKAGES=1" | tee -a ${HOME}/.bashrc  
-
+export PIP_BREAK_SYSTEM_PACKAGES=1
 pip install jsbeautifier esprima
 wait
 echo "GUI installation completed."
@@ -210,6 +209,7 @@ EOT
   cat >>${HOME}/.bashrc <<\EOT
 export PATH=$PATH:${HOME}/.local/bin
 export PS1="\[\033[0;32m\]\w\[\033[0m\]\$ "
+export PIP_BREAK_SYSTEM_PACKAGES=1
 EOT
   cat >${HOME}/.nanorc <<EOT
 set linenumbers
