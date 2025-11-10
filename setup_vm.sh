@@ -137,7 +137,7 @@ echo "Installing Gemini ..."
 cat >gemini.sh <<EOT
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="/home/${CHROME_REMOTE_USER_NAME}/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"
 nvm install 20
 nvm use 20
 npm install -g @google/gemini-cli
