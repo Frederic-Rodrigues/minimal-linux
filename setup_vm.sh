@@ -144,7 +144,7 @@ export NVM_DIR="\$HOME/.nvm"
 nvm install 20
 nvm use 20
 npm install -g @google/gemini-cli
-npm install -g prettier js-beautify
+npm install -g js-beautify webcrack
 EOT
 chmod +x gemini.sh
 bash gemini.sh
