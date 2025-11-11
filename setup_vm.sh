@@ -116,7 +116,7 @@ fi
 
 # Install packages Gui
 echo "Installing minimal desktop environment and applications..."
-sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm jsbeautifier xclip xfce4-screenshooter mousepad
+sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm xclip xfce4-screenshooter mousepad
 
 # Force installation of pip package in managed env
 export PIP_BREAK_SYSTEM_PACKAGES=1
@@ -144,7 +144,7 @@ export NVM_DIR="\$HOME/.nvm"
 nvm install 20
 nvm use 20
 npm install -g @google/gemini-cli
-npm install -g prettier
+npm install -g prettier js-beautify
 EOT
 chmod +x gemini.sh
 bash gemini.sh
