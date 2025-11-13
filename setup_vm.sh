@@ -143,8 +143,8 @@ export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"
 nvm install 20
 nvm use 20
-npm install -g @google/gemini-cli
-npm install -g js-beautify webcrack
+sudo npm install -g @google/gemini-cli
+sudo npm install -g js-beautify webcrack
 EOT
 chmod +x gemini.sh
 sudo -u "${CHROME_REMOTE_USER_NAME}" bash gemini.sh
