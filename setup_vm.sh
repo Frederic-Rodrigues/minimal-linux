@@ -147,7 +147,7 @@ npm install -g @google/gemini-cli
 npm install -g js-beautify webcrack
 EOT
 chmod +x gemini.sh
-bash gemini.sh
+sudo -u "${CHROME_REMOTE_USER_NAME}" bash gemini.sh
 
 # Install VsCode
 echo "Installing VsCode..."
