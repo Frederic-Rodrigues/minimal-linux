@@ -120,9 +120,14 @@ sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manag
 
 # Force installation of pip package in managed env
 export PIP_BREAK_SYSTEM_PACKAGES=1
-pip install jsbeautifier esprima
+pip install esprima
 wait
 echo "GUI installation completed."
+
+# Install npm packages
+sudo npm install -g js-beautify webcrack
+wait
+echo "npm packages installation completed."
 
 # Install Burp Suite Community Edition
 echo "Installing Burp Suite Community Edition ..."
@@ -144,7 +149,6 @@ export NVM_DIR="\$HOME/.nvm"
 nvm install 20
 nvm use 20
 sudo npm install -g @google/gemini-cli
-sudo npm install -g js-beautify webcrack
 EOT
 chmod +x gemini.sh
 sudo -u "${CHROME_REMOTE_USER_NAME}" bash gemini.sh
