@@ -211,12 +211,12 @@ EOT
   sudo chown -R ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.config
   sudo chown ${CHROME_REMOTE_USER_NAME}:${CHROME_REMOTE_USER_NAME} ${USER_HOME}/.bashrc
 
-  cat >>${HOME}/.bashrc <<\EOT
+  cat >>${USER_HOME}/.bashrc <<\EOT
 export PATH=$PATH:${HOME}/.local/bin
 export PS1="\[\033[0;32m\]\w\[\033[0m\]\$ "
 export PIP_BREAK_SYSTEM_PACKAGES=1
 EOT
-  cat >${HOME}/.nanorc <<EOT
+  cat >${USER_HOME}/.nanorc <<EOT
 set linenumbers
 set tabsize 4
 EOT
