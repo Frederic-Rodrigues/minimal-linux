@@ -149,7 +149,7 @@ export NVM_DIR="\$HOME/.nvm"
 nvm install --lts
 nvm use --lts
 sudo npm install -g @google/gemini-cli
-sudo npm install -g @githubnext/copilot-cli
+sudo npm install -g @github/copilot
 EOT
 chmod +x gemini.sh
 sudo -u "${CHROME_REMOTE_USER_NAME}" bash gemini.sh
