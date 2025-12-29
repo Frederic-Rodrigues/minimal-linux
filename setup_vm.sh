@@ -141,14 +141,15 @@ echo "Installing Zaproxy ..."
 sudo snap install zaproxy --classic
 
 # Install Gemini
-echo "Installing Gemini ..."
+echo "Installing AI ..."
 cat >gemini.sh <<EOT
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"
-nvm install 20
-nvm use 20
+nvm install --lts
+nvm use --lts
 sudo npm install -g @google/gemini-cli
+sudo npm install -g @githubnext/copilot-cli
 EOT
 chmod +x gemini.sh
 sudo -u "${CHROME_REMOTE_USER_NAME}" bash gemini.sh
