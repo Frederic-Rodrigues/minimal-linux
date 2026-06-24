@@ -118,14 +118,8 @@ fi
 echo "Installing minimal desktop environment and applications..."
 sudo ${APT_INSTALL_CMD} install -yqq xfce4 --no-install-recommends network-manager file-roller dbus-x11 fonts-wqy-microhei fonts-wqy-zenhei fonts-noto-cjk wabt python3-pip build-essential xfce4-notifyd hashid npm xclip xfce4-screenshooter mousepad
 
-# Force installation of pip package in managed env
-export PIP_BREAK_SYSTEM_PACKAGES=1
-pip install esprima
-wait
-echo "GUI installation completed."
-
 # Install npm packages
-sudo npm install -g js-beautify webcrack
+sudo npm install -g js-beautify
 wait
 echo "npm packages installation completed."
 
@@ -148,7 +142,8 @@ export NVM_DIR="\$HOME/.nvm"
 [ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"
 nvm install --lts
 nvm use --lts
-sudo npm install -g @google/gemini-cli
+#sudo npm install -g @google/gemini-cli
+curl -fsSL https://antigravity.google/cli/install.sh | bash
 sudo npm install -g @github/copilot
 EOT
 chmod +x gemini.sh
